@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text" id="generatorInput">
+                    <input class="form-control" type="text" id="generatedPin">
                     <button class="generate-btn" id="generatorBtn">Generate Pin</button>
                 </div>
             </div>
@@ -55,13 +55,11 @@
         </div>
     </div>
     <script>
-        function createRandom(){
-        const randomNum= (Math.random()*9999);
-        return Math.round(randomNum);
-        }
         document.getElementById('generatorBtn').addEventListener('click',function(){
-            if(createRandom()>1000){
-                document.getElementById('generatorInput').value = createRandom();
+            randomNum= (Math.random()*9999);
+            randomInt = Math.round(randomNum);
+            if(randomInt>999){
+                document.getElementById('generatedPin').value = randomInt;
             }
         })
         function inputNum(id){
@@ -70,15 +68,15 @@
         document.getElementById('clearAll').addEventListener('click',function(){
             document.getElementById('pinOutput').value = "";
         })
-        function removeLast(){
+        function backSpace(){
             return document.getElementById('pinOutput').value.slice(0,-1);
         }
         document.getElementById('clearNum').addEventListener('click',function(){
-            document.getElementById('pinOutput').value = removeLast()
+            document.getElementById('pinOutput').value = backSpace();
         })
         document.getElementById('submitPin').addEventListener('click',function(){
             let inputPin = document.getElementById('pinOutput').value;
-            let generatorOutput = document.getElementById('generatorInput').value;
+            let generatorOutput = document.getElementById('generatedPin').value;
             if(inputPin == generatorOutput){
                 document.getElementById('successPin').style.display = "block";
                 document.getElementById('unsuccessPin').style.display = "none"
